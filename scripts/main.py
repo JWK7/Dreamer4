@@ -4,7 +4,7 @@ import numpy as np
 import optax
 from flax import nnx
 
-from dreamer4.networks import MLP
+from dreamer_v4.networks import MLP
 from data.mnist import load_mnist_data
 
 BATCH_SIZE = 256
@@ -44,7 +44,7 @@ def main():
     test_y  = np.array([y for _, y in test], dtype=np.int32)
 
     rngs = nnx.Rngs(0)
-    model = MLP(in_dim=784, h_dim=256, out_dim=10, num_layers=2,
+    model = MLP(in_dim=784, hidden_layers=[256,256], out_dim=10,
                 activation=jax.nn.relu, rngs=rngs)
 
     optimizer = nnx.Optimizer(model, optax.adam(LEARNING_RATE), wrt= nnx.Param)
