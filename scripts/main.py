@@ -11,6 +11,9 @@ BATCH_SIZE = 256
 EPOCHS = 10
 LEARNING_RATE = 1e-3
 
+#choose cuda device = 1
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 @nnx.jit
 def train_step(model: MLP, optimizer: nnx.Optimizer, x: jax.Array, y: jax.Array):
